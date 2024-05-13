@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annuaire Téléphonique</title>
+</head>
+<body>
+    <h1>Annuaire Téléphonique</h1>
+
+    <script>
+        let annuaire = {};
+
+        function ajouterContact() {
+            const nom = prompt("Entrez le nom du contact :");
+            const numero = prompt("Entrez le numéro de téléphone du contact :");
+            annuaire[nom] = numero;
+            alert("Contact ajouté avec succès !");
+            annuaireTelephonique();
+        }
+
+        function rechercherNumero() {
+            const nom = prompt("Entrez le nom du contact pour rechercher son numéro :");
+            const numero = annuaire[nom];
+            if (numero) {
+                alert(`Le numéro de téléphone de ${nom} est : ${numero}`);
+            } else {
+                alert(`Aucun numéro trouvé pour le contact ${nom}`);
+            }
+            annuaireTelephonique();
+        }
+
+        function listerContacts() {
+            let liste = "Liste des contacts :\n";
+            for (const nom in annuaire) {
+                liste += `${nom} : ${annuaire[nom]}\n`;
+            }
+            alert(liste);
+            annuaireTelephonique();
+        }
+
+        function supprimerContact() {
+            const nom = prompt("Entrez le nom du contact que vous souhaitez supprimer :");
+            if (annuaire[nom]) {
+                delete annuaire[nom];
+                alert(`Le contact ${nom} a été supprimé avec succès !`);
+            } else {
+                alert(`Aucun contact trouvé avec le nom ${nom}`);
+            }
+            annuaireTelephonique();
+        }
+
+        function annuaireTelephonique() {
+            let choix;
+            do {
+                choix = prompt("Choisissez une option :\n (r) Rechercher un numéro\n (l) Lister les contacts\n (a) Ajouter un contact\n (s) Supprimer un contact\n (q) Quitter").toLowerCase();
+                switch (choix) {
+                    case 'r':
+                        rechercherNumero();
+                        break;
+                    case 'l':
+                        listerContacts();
+                        break;
+                    case 'a':
+                        ajouterContact();
+                        break;
+                    case 's':
+                        supprimerContact();
+                        break;
+                    case 'q':
+                        alert("Merci d'avoir utilisé l'annuaire téléphonique !");
+                        break;
+                    default:
+                        alert("Option invalide. Veuillez choisir une option valide.");
+                }
+            } while (choix !== 'q');
+        }
+
+        annuaireTelephonique();
+    </script>
+</body>
+</html>
